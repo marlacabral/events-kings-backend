@@ -9,7 +9,7 @@ const staff = [
         rg: "8093744012",
         cpf: "01361186070",
         experienceEvents: "Garçonete, bar, caixa",
-        pic: "./assets/img1.png",
+        pic: "./assets/images/img1.png",
         adress: "Rua Dorval Marques, 166 Santa Teresa Porto Alegre/RS"
     },
     {
@@ -22,7 +22,7 @@ const staff = [
         rg: "5096276265",
         cpf: "04069158065",
         experienceEvents: "Bar",
-        pic: "./assets/img2.png",
+        pic: "./assets/images/img2.png",
         adress: "Rua A, 100 Porto Alegre/RS"
     }
 ];

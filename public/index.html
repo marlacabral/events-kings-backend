@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kings Eventos</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="Home">
+        <h2>Pesquisar Colaborador</h2>
+            <div class="colaborador-escolhido-espaco">
+                <div id="colaborador-escolhido-input-espaco">
+                    <input type="number" 
+                    id="idColaborador" 
+                    placeholder="Digite o ID do colaborador e clique no botão"/>
+
+                    <button id="idStaffButton" onclick="findByIdColaborador()">PESQUISAR</button>
+                </div>
+            
+                <div id="colaboradorEscolhido"></div>
+            </div>
+
+            <h2>Cadastrar Colaborador:</h2>
+            <div>
+                <input type="text" id="name" placeholder="Nome"/>
+            </div>
+            <div>
+                <input type="text" id="idade" placeholder="Idade"/>
+            </div>
+            <div>
+                <input type="email" id="email" placeholder="Email"/>
+            </div>
+            <div>
+                <input type="text" id="whatsapp" placeholder="Whatsapp"/>
+            </div>
+            <div>
+                <input type="text" id="fone" placeholder="Fone"/>
+            </div>
+            <div>
+                <input type="text" id="rg" placeholder="RG"/>
+            </div>
+            <div>
+                <input type="text" id="cpf" placeholder="CPF"/>
+            </div>
+            <div>
+                <input type="text" id="experienceEvents" placeholder="Experiência em Eventos"/>
+            </div>
+            <div>
+                <input type="text" id="pic" placeholder="Foto"/>
+            </div>
+            <div>
+                <input type="text" id="adress" placeholder="Endereço"/>
+            </div>
+            
+            <div>
+                <button onclick="submitColaborador()">Enviar</button>
+            </div>
+            
+        <h2>Colaboradores Cadastrados:</h2>
+        <div class="Home_container">
+            <div class="StaffLista" id="staffList"></div>
+        </div>
+    </div>
+</body>
+</html>
