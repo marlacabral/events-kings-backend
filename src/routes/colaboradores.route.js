@@ -1,10 +1,7 @@
 const express = require('express');
 const router = express.Router();
-
-const { validId, validObjectBody } = require('../middlewares/colaborador.middleware');
-
-
 const staffController = require('../controllers/colaboradores.controller');
+const { validId, validObjectBody } = require('../middlewares/colaborador.middleware');
 
 router.get('/all-staff', staffController.findStaffController);
 

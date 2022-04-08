@@ -24,7 +24,9 @@ const validObjectBody = (req, res, next) => {
         !colaborador.pic ||
         !colaborador.adress
     ){
-        return res.status(400).send({ message: "Campos enviados estão incorretos." })
+        return res
+        .status(400)
+        .send({ message: "Campos enviados estão incorretos." })
     }
     next();
 }

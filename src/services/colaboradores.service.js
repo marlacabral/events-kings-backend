@@ -1,8 +1,8 @@
-const colaborador = require('../utils/models/colaboradorSchema');
+const Colaborador = require('../utils/models/colaboradorSchema');
 
 const findStaffService = async () => {
     try{
-        const staff = await colaborador.find();
+        const staff = await colab.find();
         if (staff !== undefined){
             return staff;
     } else {
@@ -13,12 +13,13 @@ const findStaffService = async () => {
 }
 
 const findColaboradorByIdService = async (id) => {
-    const colaboradorById = await colaborador.findById(id);
+    const colaboradorById = await Colaborador.findById(id);
+    console.log(colaboradorById)
     if (colaboradorById === undefined){
         console.log('Nenhum colaborador foi encontrado');
         return undefined
     }
-    return colaboradorById
+    return colaboradorById;
 };
 
 const createColaboradorService = async (newColaborador) => {
@@ -49,18 +50,20 @@ const createColaboradorService = async (newColaborador) => {
     }
     if(newColaborador.adress || newColaborador.adress === " "){
         throw new Error({ message: "O endereço deve ser preenchido." })
-    }
-    try {
-        await colaborador.create(newColaborador)
+
+    }try{
+        await Colaborador.create(newColaborador);
+        console.log(newColaborador)
         return newColaborador;
-    } catch (err) {
+    }catch (err){
         console.log(err)
-        throw new Error ({ message: err })
+        throw new Error({ message: err })
     }
 };
 
 const updateColaboradorService = async (id, colaboradorEdit) => {
-    const colaboradorById = await colaborador.findByIdAndUpdate(id, colaboradorEdit);
+    const colaboradorById = await Colaborador.findByIdAndUpdate(id, colaboradorEdit);
+    console.log(colaboradorById)
     if (colaboradorById === undefined){
         throw new Error ({ message: "Nenhum colaborador corresponde a esse id." })
     }
@@ -68,7 +71,8 @@ const updateColaboradorService = async (id, colaboradorEdit) => {
 }
 
 const deleteColaboradorService = async (id) => {
-    const colaboradorById = await colaborador.findByIdAndDelete(id);
+    const colaboradorById = await Colaborador.findByIdAndDelete(id);
+    console.log(colaboradorById)
     return { message: "Colaborador deletado com sucesso." }
 };
 

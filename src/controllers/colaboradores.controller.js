@@ -13,14 +13,17 @@ const findColaboradorByIdController = async (req, res) => {
 
 const createColaboradorController = async (req, res) => {
     const colaborador = req.body;
-    try{
-        const newColaborador = await staffService.createColaboradorService(colaborador);
-        res.status(201).send(newColaborador);
-    }catch(err){
-        console.log(err)
-        res.status(400).send(err)
-    }   
-};
+
+    if(
+        !colaborador
+    ) {
+        return res
+        .status(400)
+        .send({message: "Preencha"});
+    }
+    const newColaborador = await staffService.createColaboradorService(colaborador);
+    res.status(201).send(newColaborador);
+}
 
 const updateColaboradorController = async (req, res) => {
     const idParam = parseInt(req.params.id);
