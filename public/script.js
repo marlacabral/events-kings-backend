@@ -101,8 +101,7 @@ const submitColaborador = async () => {
         pic,
         adress,
     };
-
-    const response = await fetch(baseUrl + '/create', {
+    const response = await fetch(`${baseUrl}/create`, {
         method: 'post',
         headers: {
             "Content-Type": "application/json",
