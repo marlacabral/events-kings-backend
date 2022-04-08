@@ -1,72 +1,75 @@
-const staff = [
-    {
-        id: 1,
-        name: "Marla Cabral",
-        idade: "32",
-        email: "devmarlacabral@gmail.com",
-        whatsapp: "51996140140",
-        fone: "7398517608",
-        rg: "8093744012",
-        cpf: "01361186070",
-        experienceEvents: "Garçonete, bar, caixa",
-        pic: "./assets/images/img1.png",
-        adress: "Rua Dorval Marques, 166 Santa Teresa Porto Alegre/RS"
-    },
-    {
-        id: 2,
-        name: "José Júnior",
-        idade: "22",
-        email: "jose@gmail.com",
-        whatsapp: "51994140242",
-        fone: "51994140242",
-        rg: "5096276265",
-        cpf: "04069158065",
-        experienceEvents: "Bar",
-        pic: "./assets/images/img2.png",
-        adress: "Rua A, 100 Porto Alegre/RS"
-    }
-];
+const colaborador = require('../utils/models/colaboradorSchema');
 
-const findStaffService = () => {
-    return staff;
+const findStaffService = async () => {
+    const staff = await colaborador.find();
+    if (staff !== undefined){
+        return staff;
+    } else {
+        throw new Error({ message: "Erro ao encontrar staff." })
+    }
 };
 
-const findColaboradorByIdService = (id) => {
-    const colaborador = staff.find((objeto) => {
-        objeto.id == id
-    })
-
-    if (colaborador === undefined){
+const findColaboradorByIdService = async (id) => {
+    const colaboradorById = await colaborador.findById(id);
+    if (colaboradorById === undefined){
         console.log('Nenhum colaborador foi encontrado');
         return undefined
     }
-    return colaborador
+    return colaboradorById
 };
 
-const createColaboradorService = (newColaborador) => {
-    const newId = staff.length + 1;
-    newColaborador.id = newId;
-    if (newColaborador.cpf !== [11]){
-        return null;
+const createColaboradorService = async (newColaborador) => {
+    if (newColaborador === undefined){
+        throw new Error({message: "Nenhum dado recebido."})
     }
-    staff.push(newColaborador);
-    return newColaborador;
+    if(newColaborador.name === undefined || newColaborador.name === ""){
+        throw new Error({message: "O nome deve ser preenchido."})
+    }
+    if(newColaborador.idade || newColaborador.idade === ""){
+        throw new Error({message: "A idade deve ser preenchida."})
+    }
+    if(newColaborador.email || newColaborador.email === ""){
+        throw new Error({message: "O email deve ser preenchido."})
+    }
+    if(newColaborador.whatsapp === undefined || newColaborador.whatsapp === ""){
+        throw new Error({message: "O whatsapp deve ser preenchido."})
+    }
+    if(newColaborador.fone === undefined || newColaborador.fone === ""){
+        throw new Error({message: "O fone deve ser preenchido com DDD."})
+    }
+    if(newColaborador.rg || newColaborador.rg === ""){
+        throw new Error({message: "O RG deve ser preenchido."})
+    }
+    if(newColaborador.cpf === undefined || newColaborador.cpf === ""){
+        throw new Error({message: "O CPF deve ser preenchido."})
+    }
+    if(newColaborador.experienceEvents || newColaborador.experienceEvents === ""){
+        throw new Error({message: "Experiência com Eventos deve ser preenchido."})
+    }
+    if(newColaborador.adress || newColaborador.adress === ""){
+        throw new Error({message: "O endereço deve ser preenchido."})
+    }
+    try {
+        await colaborador.create(newColaborador)
+        return newColaborador;
+    } catch (err) {
+        console.log(err)
+        throw new Error ({ message: err })
+    }
+};
+
+const updateColaboradorService = async (id, colaboradorEdit) => {
+    const colaboradorById = await colaborador.findByIdAndUpdate(id, colaboradorEdit);
+    if (colaboradorById === undefined){
+        throw new Error ({ message: "Nenhum colaborador corresponde a esse id." })
+    }
+    return colaboradorById;
 }
 
-const updateColaboradorService = (id, colaboradorEdit) => {
-    colaboradorEdit['id'] = id;
-    const colaboradorIndex = staff.findIndex((colaborador) => colaborador.id == id);
-    if (colaboradorIndex === undefined) {
-        return {message: 'Nenhum colaborador encontrado.'}
-    }
-    staff[colaboradorIndex] = colaboradorEdit;
-    return colaboradorEdit;
-}
-
-const deleteColaboradorService = (id) => {
-    const colaboradorIndex = staff.findIndex((colaborador) => colaborador.id == id);
-    return staff.splice(colaboradorIndex, 1);
-}
+const deleteColaboradorService = async (id) => {
+    const colaboradorById = await colaborador.findByIdAndDelete(id);
+    return { message: "Colaborador deletado com sucesso." }
+};
 
 module.exports = {
     findStaffService,

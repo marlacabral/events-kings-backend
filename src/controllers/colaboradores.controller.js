@@ -13,8 +13,14 @@ const findColaboradorByIdController = (req, res) => {
 
 const createColaboradorController = (req, res) => {
     const colaborador = req.body;
-    const newColaborador = staffService.createColaboradorService(colaborador);
-    res.send(newColaborador);
+    try{
+        const newColaborador = staffService.createColaboradorService(colaborador);
+        console.log(newColaborador)
+        res.status(201).send(newColaborador);
+    }catch(err){
+        console.log(err)
+        res.status(400).send(err)
+    }   
 };
 
 const updateColaboradorController = (req, res) => {
