@@ -1,8 +1,13 @@
 const staffService = require('../services/colaboradores.service');
 
 const findStaffController = async (req, res) => {
-    const allStaff = await staffService.findStaffService();
-    res.send(allStaff);
+    try{
+        const allStaff = await staffService.findStaffService();
+        res.send(allStaff);
+    }catch(err){
+        console.log(err);
+        res.status(400).send({message: 'houve algum erro'})
+    }    
 };
 
 const findColaboradorByIdController = async (req, res) => {
@@ -13,29 +18,46 @@ const findColaboradorByIdController = async (req, res) => {
 
 const createColaboradorController = async (req, res) => {
     const colaborador = req.body;
-
-    if(
-        !colaborador
-    ) {
-        return res
-        .status(400)
-        .send({message: "Preencha"});
+    try{
+        if(
+            !colaborador
+        ) {
+            return res
+            .status(400)
+            .send({message: "Preencha todos os campos."});
+        }
+        const newColaborador = await staffService.createColaboradorService(colaborador);
+        res.status(201).send(newColaborador);
+    } catch(err){
+        console.log(err);
+        res.status(400).send({message: 'houve algum erro'})
     }
-    const newColaborador = await staffService.createColaboradorService(colaborador);
-    res.status(201).send(newColaborador);
 }
 
 const updateColaboradorController = async (req, res) => {
-    const idParam = parseInt(req.params.id);
+    const idParam = req.params.id;
+    console.log(idParam);
     const colaboradorEdit = req.body;
-    const updateColaborador = await staffService.updateColaboradorService(idParam, colaboradorEdit);
-    res.send(updateColaborador);
-}
+    try{
+        const updateColaborador = await staffService.updateColaboradorService(
+            idParam, 
+            colaboradorEdit,
+        );
+        res.status(200).send(updateColaborador);
+    }catch(err){
+        console.log(err);
+        res.status(400).send({message: 'Houve algum erro nesta busca.'})
+    }
+};
 
 const deleteColaboradorController = async (req, res) => {
     const idParam = req.params.id;
-    await staffService.deleteColaboradorService(idParam);
-    res.send({message: 'Colaborador deletado com sucesso.'})
+    try{
+        await staffService.deleteColaboradorService(idParam);
+        res.status(200).send({ message: 'Colaborador deletado com sucesso.'});
+    }catch (err) {
+        res.status(400).send({ message: 'Não foi possivel deletar colaborador' });
+    }
 }
 
 
