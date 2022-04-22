@@ -9,7 +9,7 @@ const staffSchema = new Schema({
     fone: {type: String, required: true},
     rg: {type: String, required: true},
     cpf: {type: String, required: true},
-    experienceEvents: {type: String, required: true},
+    experienceEvents: {type: Boolean, required: true},
     pic: {type: String, required: false},
     adress: {type: String, required: true},
     created: {type: Date, default: Date.now()}
