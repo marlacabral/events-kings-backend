@@ -26,7 +26,7 @@ const createColaboradorService = async (newColaborador) => {
     if (newColaborador === undefined){
         throw new Error({ message: "Nenhum dado recebido." });
     }
-    if(newColaborador.name === undefined || newColaborador.name === ""){
+    if(newColaborador.nome === undefined || newColaborador.nome === ""){
         console.log("rodou validacao");
         throw new Error({ message: "O nome deve ser preenchido." })
     }
@@ -45,12 +45,11 @@ const createColaboradorService = async (newColaborador) => {
     if(newColaborador.cpf === undefined || newColaborador.cpf === ""){
         throw new Error({ message: "O CPF deve ser preenchido." })
     }
-    if(newColaborador.experienceEvents === undefined || newColaborador.experienceEvents === ""){
-        throw new Error({ message: "Experiência com Eventos deve ser preenchido." })
-    }
     if(newColaborador.adress === undefined || newColaborador.adress === ""){
         throw new Error({ message: "O endereço deve ser preenchido." })
-
+    }
+    if(newColaborador.pic === undefined || newColaborador.pic === ""){
+            throw new Error({ message: "O caminho da imagem deve ser preenchido." })
     }try{
         await Colaborador.create(newColaborador);
         console.log(newColaborador)
@@ -64,7 +63,7 @@ const createColaboradorService = async (newColaborador) => {
 const updateColaboradorService = async (id, colaboradorEdit) => {
     console.log(colaboradorEdit)
     try{
-        if (!colaboradorEdit.name && !colaboradorEdit.idade && !colaboradorById.email && !colaboradorEdit.whatsapp && !colaboradorEdit.fone && !colaboradorById.rg && !colaboradorEdit.cpf && !colaboradorEdit.pic && !colaboradorEdit.adress && !colaboradorEdit.experienceEvents){
+        if (!colaboradorEdit.nome && !colaboradorEdit.idade && !colaboradorById.email && !colaboradorEdit.whatsapp && !colaboradorEdit.fone && !colaboradorById.rg && !colaboradorEdit.cpf && !colaboradorEdit.pic && !colaboradorEdit.adress){
             throw new Error ({ message: "Nenhum colaborador corresponde a esse id." });
         }
     

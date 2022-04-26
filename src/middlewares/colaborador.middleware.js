@@ -13,14 +13,13 @@ const validObjectBody = (req, res, next) => {
 
     if(
         !colaborador ||
-        !colaborador.name ||
+        !colaborador.nome ||
         !colaborador.idade ||
         !colaborador.email || 
         !colaborador.whatsapp ||
         !colaborador.fone ||
         !colaborador.rg ||
         !colaborador.cpf ||
-        !colaborador.experienceEvents ||
         !colaborador.pic ||
         !colaborador.adress
     ){
